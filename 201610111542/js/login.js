@@ -15,6 +15,7 @@
         if(data == "Login failed"){
           alert(data);
         }else{
+          $('#header_username').html(username);
           $('#main_container').show();
           $('.login-container').fadeOut(300, function(){
             $(this).hide();
