@@ -4,23 +4,48 @@
 
   $(document).ready(function(){
 
-    var catch_key = function(event){
-　　　　if(event.keyCode == 13){
-          sign_in(function(){
-            $(document).unbind(event, catch_key);
-          });
-　　　　}
-　　}
-    $(document).keydown(catch_key);
+    checkSession();
 
-    $('#login_submit').click(function(){
-      sign_in(function(){
-        $(document).unbind(event, catch_key);
-      })
-    });
+    //header and navigation
+    $('.dropdown-toggle').dropdown();
+
+
+
   });
 
-  function sign_in(cb){
+  function checkSession(){
+    showSignInView(0);
+    return true;
+  }
+
+
+  function showSignInView(ms){
+    $('.login-container').fadeIn(ms, function(){
+      $('#main_container').hide();
+    });
+
+    $('#login_submit').click(function(){
+      signIn()
+    });
+  }
+
+  function showMainView(username){
+    $('#nav_username').html(username);
+    $('#nav_account_btn').addClass('caret');
+    $('.dropdown-toggle').dropdown();
+
+    $('#main_container').show();
+    $('.login-container').fadeOut(300);
+    $('#login_submit').unbind('click');
+  }
+
+  /*
+  Sends a post request to sign in, and changes the view if succeeded.
+  Arguments:
+  -cb callback function, called when sign in succeeded
+  Returns: null
+  */
+  function signIn(){
     var username = $('#login_username').val();
     var password = $('#login_password').val();
     $.post(url + "test.php", {
@@ -33,12 +58,10 @@
       }else{
         //succeeded
         $("#login_feedback").html("");
-        $('#header_username').html(username);
-        $('#main_container').show();
-        $('.login-container').fadeOut(300, function(){
-          $(this).hide();
-        });
-        if(typeof cb === "function") cb();
+        //header
+        showMainView(username);
+
+
       }
       console.log(data);
     });
