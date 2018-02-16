@@ -4,33 +4,39 @@
 
   $(document).ready(function(){
 
-    checkSession();
+    if(checkSession())
+      showSignInView(0);
+    else
+      showMainView(window.username);
 
-    //header and navigation
-    $('.dropdown-toggle').dropdown();
-
-
-
-  });
-
-  function checkSession(){
-    showSignInView(0);
-    return true;
-  }
-
-
-  function showSignInView(ms){
-    $('.login-container').fadeIn(ms, function(){
-      $('#main_container').hide();
+    $('#nav_sign_out').click(function(){
+      signOut()
     });
 
     $('#login_submit').click(function(){
       signIn()
     });
+  });
+
+  function checkSession(){
+
+    return true;
+  }
+
+
+  function showSignInView(ms){
+    $('#nav_username').html("Sign in");
+    $('#nav_account_dropdown').addClass('disabled').attr("onclick", 'location.reload()');
+    $('#nav_account_btn').removeClass('caret');
+    $('.login-container').fadeIn(ms, function(){
+      $('#main_container').hide();
+    });
+
   }
 
   function showMainView(username){
     $('#nav_username').html(username);
+    $('#nav_account_dropdown').removeClass('disabled').removeAttr('onclick');
     $('#nav_account_btn').addClass('caret');
     $('.dropdown-toggle').dropdown();
 
@@ -61,17 +67,22 @@
         //header
         showMainView(username);
 
-
+        window.username = username;
       }
       console.log(data);
     });
 
-
   }
 
+  function signOut(){
+    signOutSession();
+    showSignInView();
+  }
 
+  //TODO
+  function signOutSession(){
 
-
+  }
 
 
 

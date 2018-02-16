@@ -15,17 +15,16 @@
 </head>
 <body>
 	<header class="header">
-		<!-- <div class="container row"> -->
 			<ul class="nav nav-pills">
 				<!-- <li role="presentation" class="active"><a href="#">Home</a></li>
 	      <li role="presentation"><a href="#">Help</a></li> -->
 				<li id="nav_account" role="presentation" class="dropdown">
-	        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+	        <a id="nav_account_dropdown" class="dropdown-toggle disabled" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
 						<i style="margin-right:3px" class="fa fa-user"></i>
-	          <span id="nav_username" >Sign in</span> <span id="nav_account_btn" class=""></span>
+	          <span id="nav_username">Sign in</span> <span id="nav_account_btn" class=""></span>
 	        </a>
 	        <ul class="dropdown-menu">
-	          <li><a href="#">Action</a></li>
+	          <li id="nav_sign_out"><a href="#">Sign out</a></li>
 	          <li><a href="#">Another action</a></li>
 	          <li><a href="#">Something else here</a></li>
 	          <li role="separator" class="divider"></li>
@@ -33,11 +32,6 @@
 	        </ul>
 	      </li>
     	</ul>
-		<!-- </div> -->
-		<!-- <div class="account">
-			<i class="fa fa-user"></i>
-			<span id="header_username">Sign in</span>
-		</div> -->
 	</header>
 
 	<div id="main_container" class="container" style="position: absolute; top: 150px; left: 100px; display:none; font-size: 2em"> You have logged in. </div>
