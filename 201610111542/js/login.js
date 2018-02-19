@@ -38,11 +38,10 @@
     $('#nav_username').html(username);
     $('#nav_account_dropdown').removeClass('disabled').removeAttr('onclick');
     $('#nav_account_btn').addClass('caret');
-    $('.dropdown-toggle').dropdown();
+    $('#nav_account_dropdown').dropdown();
 
     $('#main_container').show();
     $('.login-container').fadeOut(300);
-    $('#login_submit').unbind('click');
   }
 
   /*
@@ -54,6 +53,10 @@
   function signIn(){
     var username = $('#login_username').val();
     var password = $('#login_password').val();
+
+    quasi_sign_in(); return;  //TODO to be deleted
+
+
     $.post(url + "test.php", {
       email: username,
       password: password
@@ -72,6 +75,21 @@
       console.log(data);
     });
 
+  }
+
+  //TODO to be deleted
+  function quasi_sign_in(){
+    var username = $('#login_username').val();
+    var password = $('#login_password').val();
+    if(username==''||password=='')
+    $("#login_feedback").html("Incorrect username or password");
+    else{
+      $("#login_feedback").html("");
+      //header
+      showMainView(username);
+
+      window.username = username;
+    }
   }
 
   function signOut(){
