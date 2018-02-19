@@ -57,23 +57,23 @@
     quasi_sign_in(); return;  //TODO to be deleted
 
 
-    $.post(url + "test.php", {
-      email: username,
-      password: password
-    }, function(data) {
-      if(data == "Login failed"){
-        //failed
-        $("#login_feedback").html("Incorrect username or password");
-      }else{
-        //succeeded
-        $("#login_feedback").html("");
-        //header
-        showMainView(username);
-
-        window.username = username;
-      }
-      console.log(data);
-    });
+    // $.post(url + "test.php", {
+    //   email: username,
+    //   password: password
+    // }, function(data) {
+    //   if(data == "Login failed"){
+    //     //failed
+    //     $("#login_feedback").html("Incorrect username or password");
+    //   }else{
+    //     //succeeded
+    //     $("#login_feedback").html("");
+    //     //header
+    //     showMainView(username);
+    //
+    //     window.username = username;
+    //   }
+    //   console.log(data);
+    // });
 
   }
 
