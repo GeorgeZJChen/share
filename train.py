@@ -107,7 +107,8 @@ with tf.Session(graph=graph) as sess:
       logging.info(' '.join(log_str))
 
       if step % 1000==0:
-          test_results = full_test(sess, Decoded)
+          test_results = full_test(sess, Decoded,
+              input, target15, target14, target13, target12, target11, target10, training)
           log_str = ['>>> TEST ', time.asctime()+': i [', str(global_step), '] || [Result]:', str(test_results)]
           print(*log_str)
           logging.info(' '.join(log_str))
