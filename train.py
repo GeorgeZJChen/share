@@ -36,7 +36,7 @@ if True:
     best_saver = tf.train.Saver(max_to_keep=4)
     print('total number of parameters:', total_parameters())
 
-new_model = False
+new_model = True
 batch_size = 4
 part = 'A'
 best_result = 200
@@ -72,6 +72,9 @@ with tf.Session(graph=graph) as sess:
         lr = 1e-6
       elif step < 200000:
         lr = 1e-7
+
+      if step%50000==0 and not step==0:
+        best_saver.restore(sess, "./best_model/model-"+str(round(best_result,2)))
 
       train_inputs, train_targets = next_batch(batch_size, train_names)
       train_t15, train_t14, train_t13, train_t12, train_t11, train_t10 = train_targets
@@ -164,7 +167,7 @@ with tf.Session(graph=graph) as sess:
                 input, target15, target14, target13, target12, target11, target10, training, part=part)
             log_str = ['>>> TEST ', time.asctime()+': i [', str(global_step),
                        '] || [Result]:', str([round(result, 2) for result in test_results])]
-            if test_results[0] > best_result:
+            if test_results[0] < best_result:
               best_result = test_results[0]
               best_saver.save(sess, "./best_model/model-"+str(round(best_result,2)), global_step=global_step)
             log_str.append(' * BEST *')
